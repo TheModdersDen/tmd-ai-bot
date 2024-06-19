@@ -55,7 +55,7 @@ class Discollama:
 
     # registry setup hook
     self.discord.setup_hook = self.setup_hook
-
+    
     # register event handlers
     self.discord.event(self.on_ready)
     self.discord.event(self.on_message)
@@ -91,10 +91,9 @@ class Discollama:
       content = 'Hi!'
 
     channel = message.channel
-
-    context, images = [], []
+    context = []
     if reference := message.reference:
-      context, images = await self.load(message_id=reference.message_id)
+      context = await self.load(message_id=reference.message_id)
       if not context:
         reference_message = await message.channel.fetch_message(reference.message_id)
         content = '\n'.join(
@@ -198,7 +197,6 @@ def main():
       'images': args.ollama_images_model,
     },
   ).run(os.environ['DISCORD_TOKEN'])
-
 
 if __name__ == '__main__':
   main()
