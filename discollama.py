@@ -12,7 +12,7 @@ import redis
 from logging import getLogger
 
 # piggy back on the logger discord.py set up
-logging = getLogger('discord.discollama')
+logging = getLogger('tmd-ai-bot')
 
 
 class Response:
@@ -57,7 +57,7 @@ class Discollama:
     self.discord.event(self.on_message)
 
   async def on_ready(self):
-    activity = discord.Activity(name='Discollama', state='Ask me anything!', type=discord.ActivityType.custom)
+    activity = discord.Activity(name='TMD AI', state='Ask me anything!', type=discord.ActivityType.custom)
     await self.discord.change_presence(activity=activity)
 
     logging.info(
@@ -162,7 +162,7 @@ def main():
   parser.add_argument('--ollama-scheme', default=os.getenv('OLLAMA_SCHEME', 'http'), choices=['http', 'https'])
   parser.add_argument('--ollama-host', default=os.getenv('OLLAMA_HOST', '127.0.0.1'), type=str)
   parser.add_argument('--ollama-port', default=os.getenv('OLLAMA_PORT', 11434), type=int)
-  parser.add_argument('--ollama-model', default=os.getenv('OLLAMA_MODEL', 'llama2'), type=str)
+  parser.add_argument('--ollama-model', default=os.getenv('OLLAMA_MODEL', 'llama3'), type=str)
 
   parser.add_argument('--redis-host', default=os.getenv('REDIS_HOST', '127.0.0.1'), type=str)
   parser.add_argument('--redis-port', default=os.getenv('REDIS_PORT', 6379), type=int)
